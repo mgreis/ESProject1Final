@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    
+    <link rel= "stylesheet" type= "text/css" href="/styles/style.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+		$(document).ready(function() {
+			
+			document.getElementById("subscribe").onclick = function() { 
+				  document.getElementById("login-form").action = "/commit_register";
+			};
+		});
+	</script>
+    
+  
+    <script>
+	    $(document).ready(function(){
+			$("#subscribe").click(function(){		
+				if ($("#name").val()==''){
+					$("#message").html("Falta preencher campo obrigatório");
+					$("#name").focus(); // foco no campo
+				}else if ($("#email").val()==''){
+					$("#message").html("Falta preencher campo obrigatório");
+					$("#email").focus(); // foco no campo	
+				}else if ($("#password").val()==''){
+					$("#message").html("Falta preencher campo obrigatório");
+					$("#password").focus(); // foco no campo	
+				}else if ($("#district").val()==''){
+					$("#message").html("Falta preencher campo obrigatório");
+					$("#district").focus(); // foco no campo
+				}else{
+					$("#login-form").submit();
+				}
+			});
+	    });
+
+	</script>
+    
+    </head>
+    <body>
+        <div id="messagebox">
+			<div id="message">
+				{{error}}
+			</div>
+		</div>
+        
+        <div id="wrapper2">
+        
+        <form method= "post" name="login-form" id="login-form" class="login-form">
+        
+        <div class="header">
+    	<!--TITLE--><h1>Register Form</h1><!--END TITLE-->
+    	<br/>
+    	</div>
+        
+         <div class="content">
+	            <input type="text" name = "email" id = "email" class="input username" value="Email" onfocus="this.value=''"/>
+	            <input name= "password" type="password" id = "password" class="input password" value="Password" onfocus="this.value=''"/>
+	            <br/><br/>
+	            <input type="text" name = "name" id = "name" class="input username" value="Name" onfocus="this.value=''" />
+	            <br/><br/>
+	            <input type="text" name= "district" id = "district" class="input username" value="District" onfocus="this.value=''"/>
+	            <br/><br/>
+	            <input type= "radio" name = "user_type" value = "User" checked="checked"/> User<br/>
+	            <input type= "radio" name = "user_type" value = "Dealer" /> Dealer<br/>
+	     </div>
+	    
+    	<div class="footer">
+    	<input type="button" name="subscribe" id="subscribe" value="Register" class="button"> 
+	    <a href="/"> <input type="button" class="register" value="Back"></a>
+    	</div>
+	     
+	     </form>
+	     </div>
+	     
+	     <!--GRADIENT--><div class="gradient"></div><!--END GRADIENT-->
+    </body>
+</html>

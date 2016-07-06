@@ -1,0 +1,123 @@
+
+<!-- @app.route ('/commit_car', methods = {'GET', 'POST'})
+def insert_car_into_database():
+    error = None
+    if 'email' in session:
+        if request.method == 'POST':
+            for instance in db_instance.query(User).filter(and_(User.user_email == session.get('email'), User.user_type == 'Dealer')):
+                print (instance)
+                car = Car (car_picture = request.form ['car_picture'],
+                                        car_brand = request.form ['car_brand'],
+                                        car_model= request.form ['car_model'],
+                                        car_price = request.form ['car_price'], 
+                                        car_district = request.form ['car_district'], 
+                                        car_kilometer = request.form ['car_kilometer'],
+                                        car_year = request.form['car_year'] ,
+                                        car_fuel_type = request.form ['car_fuel_type'])
+                dealer_id = request.form['dealership']
+                for instance2 in db_instance.query(Dealership).filter(Dealership.dealership_id == dealer_id):
+                    print (instance2)
+                    car.dealerships.append(instance2)                           
+                print (car)
+                instance.cars.append(car)
+            
+            db_instance.commit() 
+            return redirect ('/cars')
+            
+    else: 
+        error = 'Session Expired!'
+        return render_template ("login.html", error = error) -->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--STYLESHEETS-->
+		<link rel= "stylesheet" type= "text/css" href="/styles/style.css" />
+
+		<!--SCRIPTS-->
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var comp = "User";
+				var comp2 = document.getElementById("aux2").value;
+				
+				document.getElementById("editbutton").onclick = function() { 
+					document.getElementById("login-form").action = "/editPersonalInfo";
+				};
+				if (comp2.localeCompare(comp) == 0){
+					document.getElementById("deluserbutton").onclick = function() { 
+						document.getElementById("login-form").action = "/delete_user";
+					};
+				};
+			});
+		</script>
+		
+		<script>
+			$(document).ready(function(){
+				var comp = "User";
+				var comp2 = document.getElementById("aux2").value;
+				
+				$("#editbutton").click(function(){
+					$("#login-form").submit();
+				});
+				if (comp2.localeCompare(comp) == 0){
+					$("#deluserbutton").click(function(){
+						$("#login-form").submit();
+					});
+				};
+			});
+		</script>
+		
+    </head>
+    <body>
+    
+        <div class="headerform">
+	    	<h1> Personal Info </h1>
+        </div>
+        
+        	<input type="hidden" value="{{session.get('user_type')}}" id="aux2">
+        
+        	<div id="wrapper2">
+        	
+        	<form method= "post" name="login-form" id="login-form" class="login-form">
+        	
+        	<div class="header">
+	    	<!--TITLE--><h1>Edit Personal Info </h1><!--END TITLE-->
+	    	<br/>
+	    	</div> 
+	    	
+	    	<div class="content">    
+			        <p>Name</p> <input type="text" name = "name" id = "name" class="input username" value={{name}} >
+		            <br/><br/>
+		            <p>District</p> <input type="text" name= "district" id = "district" class="input username" value={{district}} >
+        	</div>
+        	
+        	<div class="footer" id="footer">
+        	
+    			<p align="center"> <input type="button" name="editbutton" id="editbutton" value="Edit" class="button2"/> </p>
+    	
+    			<script type="text/javascript">
+					var comp = "User";
+					var comp2 = document.getElementById("aux2").value;
+					if (comp2.localeCompare(comp) == 0){
+		 				document.getElementById("footer").innerHTML += "<br/><br/><p align='center'><input type='button' value='Delete User' class='button2' id='deluserbutton'></p>";
+		 			}
+					
+				</script>
+				
+				
+    		</div>
+        	   
+        	</form>
+        	</div>
+        	
+	    <form action="/logout">
+			<input type="submit" value="Logout" class="back"/>
+		</form>
+		<form action="/main">
+			<input type="submit"value="Back" class="back"/>
+		</form>
+    </body>
+</html>

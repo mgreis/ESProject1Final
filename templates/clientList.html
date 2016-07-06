@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--STYLESHEETS-->
+		<link rel= "stylesheet" type= "text/css" href="/styles/style.css" />
+
+		<style media="screen" type="text/css">
+			content2 {
+			  margin: 20px;
+			}
+			 
+			ul {
+			  list-style-type: none;
+			  width: 500px;
+			}
+			 
+			h3 {
+			  font: bold 24px/1.5 Helvetica, Verdana, sans-serif;
+			}
+			 
+			li img {
+			  float: left;
+			  margin: 0 15px 0 0;
+			}
+			 
+			li p {
+			  font: 200 18px/1.5 Georgia, Times New Roman, serif;
+			}
+			 
+			li {
+			  padding: 10px;
+			  overflow: auto;
+			}
+			 
+			li:hover {
+			  background: #eee;
+			  cursor: pointer;
+			}
+		</style>
+		
+		<!--SCRIPTS-->
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				document.getElementById('nameasc').onclick = function() { 
+					document.getElementById("content2").innerHTML = "<ul>";
+					var response2 = document.getElementById("temp").value;
+					text = JSON.parse(response2);
+					text.users.sort(comparename);
+					for (var i=0;i<text.users.length;i++)
+					{  
+						var name = text.users[i].user_name; 
+						var district = text.users[i].user_district;
+						var email = text.users[i].user_email;
+						document.getElementById("content2").innerHTML += "<li>" + "<h3> Name: "  + name + "</h3>" + "<p> Email: " + email + "</p><p> District: " + district + "</p> </li><br/>";
+					}
+					document.getElementById("content2").innerHTML += "</ul>";
+				};
+				document.getElementById('emailasc').onclick = function() {
+					document.getElementById("content2").innerHTML = "<ul>";
+					var response2 = document.getElementById("temp").value;
+					text = JSON.parse(response2);
+					text.users.sort(compareemail);
+					for (var i=0;i<text.users.length;i++)
+					{  
+						var name = text.users[i].user_name; 
+						var district = text.users[i].user_district;
+						var email = text.users[i].user_email;
+						document.getElementById("content2").innerHTML += "<li>" + "<h3> Name: "  + name + "</h3>" + "<p> Email: " + email + "</p><p> District: " + district + "</p> </li><br/>";
+					}
+					document.getElementById("content2").innerHTML += "</ul>";	
+				};
+				document.getElementById('districtasc').onclick = function() {
+					document.getElementById("content2").innerHTML = "<ul>";
+					var response2 = document.getElementById("temp").value;
+					text = JSON.parse(response2);
+					text.users.sort(comparedistrict);
+					for (var i=0;i<text.users.length;i++)
+					{  
+						var name = text.users[i].user_name; 
+						var district = text.users[i].user_district;
+						var email = text.users[i].user_email;
+						document.getElementById("content2").innerHTML += "<li>" + "<h3> Name: "  + name + "</h3>" + "<p> Email: " + email + "</p><p> District: " + district + "</p> </li><br/>";
+					}
+					document.getElementById("content2").innerHTML += "</ul>";
+				};
+				
+				document.getElementById('namedesc').onclick = function() { 
+					document.getElementById("content2").innerHTML = "<ul>";
+					var response2 = document.getElementById("temp").value;
+					text = JSON.parse(response2);
+					text.users.sort(comparename_desc);
+					for (var i=0;i<text.users.length;i++)
+					{  
+						var name = text.users[i].user_name; 
+						var district = text.users[i].user_district;
+						var email = text.users[i].user_email;
+						document.getElementById("content2").innerHTML += "<li>" + "<h3> Name: "  + name + "</h3>" + "<p> Email: " + email + "</p><p> District: " + district + "</p> </li><br/>";
+					}
+					document.getElementById("content2").innerHTML += "</ul>";
+				};
+				document.getElementById('emaildesc').onclick = function() {
+					document.getElementById("content2").innerHTML = "<ul>";
+					var response2 = document.getElementById("temp").value;
+					text = JSON.parse(response2);
+					text.users.sort(compareemail_desc);
+					for (var i=0;i<text.users.length;i++)
+					{  
+						var name = text.users[i].user_name; 
+						var district = text.users[i].user_district;
+						var email = text.users[i].user_email;
+						document.getElementById("content2").innerHTML += "<li>" + "<h3> Name: "  + name + "</h3>" + "<p> Email: " + email + "</p><p> District: " + district + "</p> </li><br/>";
+					}
+					document.getElementById("content2").innerHTML += "</ul>";	
+				};
+				document.getElementById('districtdesc').onclick = function() {
+					document.getElementById("content2").innerHTML = "<ul>";
+					var response2 = document.getElementById("temp").value;
+					text = JSON.parse(response2);
+					text.users.sort(comparedistrict_desc);
+					for (var i=0;i<text.users.length;i++)
+					{  
+						var name = text.users[i].user_name; 
+						var district = text.users[i].user_district;
+						var email = text.users[i].user_email;
+						document.getElementById("content2").innerHTML += "<li>" + "<h3> Name: "  + name + "</h3>" + "<p> Email: " + email + "</p><p> District: " + district + "</p> </li><br/>";
+					}
+					document.getElementById("content2").innerHTML += "</ul>";
+				};
+			});
+		</script>
+		
+		<script>
+			function comparename(a,b) {
+			  if (a.user_name < b.user_name)
+			    return -1;
+			  else if (a.user_name > b.user_name)
+			    return 1;
+			  else 
+			    return 0;
+			}
+			
+			function compareemail(a,b) {
+				  if (a.user_email < b.user_email)
+				    return -1;
+				  else if (a.user_email > b.user_email)
+				    return 1;
+				  else 
+				    return 0;
+			}
+			
+			function comparedistrict(a,b) {
+				  if (a.user_district < b.user_district)
+				    return -1;
+				  else if (a.user_district > b.user_district)
+				    return 1;
+				  else 
+				    return 0;
+			}
+			
+			
+			function comparename_desc(a,b) {
+				  if (a.user_name < b.user_name)
+				    return 1;
+				  else if (a.user_name > b.user_name)
+				    return -1;
+				  else 
+				    return 0;
+				}
+				
+				function compareemail_desc(a,b) {
+					  if (a.user_email < b.user_email)
+					    return 1;
+					  else if (a.user_email > b.user_email)
+					    return -1;
+					  else 
+					    return 0;
+				}
+				
+				function comparedistrict_desc(a,b) {
+					  if (a.user_district < b.user_district)
+					    return 1;
+					  else if (a.user_district > b.user_district)
+					    return -1;
+					  else 
+					    return 0;
+				}
+		</script>
+		
+    </head>
+    <body>
+    
+	    <div class="headerform">
+			<h1>  Client List </h1>
+		</div>
+		
+		<input type="hidden" value="{{response}}" id = "temp">
+		
+		<div id = "content2">
+			<input type="button" value="Order By Name ASC" class="back2" id="nameasc" />
+			<input type="button" value="Order By Email ASC" class="back2" id="emailasc"/>
+			<input type="button" value="Order By District ASC" class="back2" id="districtasc"/>
+			<input type="button" value="Order By Name DESC" class="back2" id="namedesc" />
+			<input type="button" value="Order By Email DESC" class="back2" id="emaildesc"/>
+			<input type="button" value="Order By District DESC" class="back2" id="districtdesc"/>
+		</div>
+		
+		
+		<script>
+		/*** INITIAL VIEW *****/
+			document.getElementById("content2").innerHTML = "<ul>";
+			var response2 = document.getElementById("temp").value;
+			text = JSON.parse(response2);
+	
+			for (var i=0;i<text.users.length;i++)
+			{  
+				var name = text.users[i].user_name; 
+				var district = text.users[i].user_district;
+				var email = text.users[i].user_email;
+				document.getElementById("content2").innerHTML += "<li>" + "<h3> Name: "  + name + "</h3>" + "<p> Email: " + email + "</p><p> District: " + district + "</p> </li><br/>";
+			}
+			document.getElementById("content2").innerHTML += "</ul>";
+		
+		</script>
+		
+		<form action="/logout">
+			<input type="submit" value="Logout" class="back"/>
+		</form>
+		<form action="/main">
+			<input type="submit" value="Back" class="back"/>
+		</form>
+		
+		<div id="buttondiv">
+			<input type="button" value="Order By Name ASC" class="back2" id="nameasc" />
+			<br/><br/><br/>
+			<input type="button" value="Order By Email ASC" class="back2" id="emailasc"/>
+			<br/><br/><br/>
+			<input type="button" value="Order By District ASC" class="back2" id="districtasc"/>
+			<br/><br/><br/>
+			<input type="button" value="Order By Name DESC" class="back2" id="namedesc" />
+			<br/><br/><br/>
+			<input type="button" value="Order By Email DESC" class="back2" id="emaildesc"/>
+			<br/><br/><br/>
+			<input type="button" value="Order By District DESC" class="back2" id="districtdesc"/>
+		</div>
+    </body>
+</html>

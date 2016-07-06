@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <form style ="border:1px solid black;width: 250px; height: 500px;" action="/commit_car" method= "post">
+                
+                <h3>Add New Car</h3>
+                           
+                Brand: <br/>
+                <input type="text" name = "brand" />
+                <br/>
+                Model:<br/>
+                <input type="text" name = "model" />
+                <br/>
+                Year: <br/>
+                <input type="text" name= "year" />
+                <br/>
+                Price: <br/>
+                 <input type="text" name= "price" />
+                <br/>
+                Picture URL: <br/>
+                 <input type="text" name= "picture" />
+                <br/>
+                Kilometers: <br/>
+                 <input type="text" name= "kilometer" />
+                <br/>
+                District: <br/>
+                 <input type="text" name= "district" />
+                <br/>
+                
+                
+                <input type= "radio" name = "fuel_type" value = "Gasoline" checked="checked"/> Gasoline<br/>
+                <input type= "radio" name = "fuel_type" value = "Diesel" /> Diesel<br/>
+                <input type= "radio" name = "fuel_type" value = "Electric" /> Electric<br/>
+                <input type= "radio" name = "fuel_type" value = "Other" /> Other<br/>
+                
+                <br/>
+                <input type = "submit" value = "Proceed" />
+            </form>
+            <form action="/main">
+                <input type="submit" value="Back">
+            </form>
+        
+        
+        
+        
+        
+             <form action="http://localhost:5000/logout">
+                <input type="submit" value="Logout">
+            </form>
+        </div>
+    
+    
+    </body>
+</html>

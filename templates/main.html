@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello From Flask</title>
+        
+        <!--STYLESHEETS-->
+		<link rel= "stylesheet" type= "text/css" href="/styles/style.css" />
+
+		<!--SCRIPTS-->
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var comp = "Dealer";
+				var comp2 = document.getElementById("temp").value;
+				
+				document.getElementById("carsbutton").onclick = function() { 
+					  document.getElementById("login-form").action = "/cars";
+				};
+				document.getElementById("dealershipbutton").onclick = function() { 
+					  document.getElementById("login-form").action = "/dealerships";
+				};
+				if (comp2.localeCompare(comp) == 0){
+					document.getElementById("clientlistbutton").onclick = function() { 
+						  document.getElementById("login-form").action = "/getClientsHTML";
+					};
+				};
+				document.getElementById("personalbutton").onclick = function() { 
+					  document.getElementById("login-form").action = "/personalInfo";
+				};
+				document.getElementById("logoutbutton").onclick = function() { 
+					  document.getElementById("login-form").action = "/logout";
+				};
+			});
+		</script>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var comp = "Dealer";
+				var comp2 = document.getElementById("temp").value;
+				
+				$("#carsbutton").click(function(){
+					$("#login-form").submit();
+				});
+				$("#dealershipbutton").click(function(){
+					$("#login-form").submit();
+				});
+				if (comp2.localeCompare(comp) == 0){
+					$("#clientlistbutton").click(function(){
+						$("#login-form").submit();
+					});
+				};
+				$("#personalbutton").click(function(){
+					$("#login-form").submit();
+				});
+				$("#logoutbutton").click(function(){
+					$("#login-form").submit();
+				});
+				
+			});
+		</script>
+		
+        
+    </head>
+    <body>
+    
+		{% with messages = get_flashed_messages() %}
+		   {% if messages %}
+		      {% for message in messages %}
+		    	<div id="messagebox">
+					<div id="message">
+						{{message}}
+					</div>
+				</div>
+		      {% endfor %}
+		   {% endif %}
+		{% endwith %}
+		
+
+    
+    
+    	<div class="headerform">
+    		<h12>get4Wheels</h12>
+	    	{% if name %}
+	            <h11> Hello {{name}} </h11>
+	        {% else %}
+	            <h11> Hello World! </h11>
+	        {% endif %}
+	       
+        </div>
+   
+    
+    	<input type="hidden" value="{{session.get('user_type')}}" id = "temp">
+    	
+    	<div id = "message">
+        </div>
+        
+        <div id="wrapper2">
+        <form name="login-form" class="login-form" id="login-form">
+        
+        <div class="header">
+    	<!--TITLE--><h1>{{session.get('user_type')}} Main Menu</h1><!--END TITLE-->
+    	<br/>
+    	</div>
+        
+        <div class="footer" id="footer">
+        <p align = "center">
+        <input type="button" value="Cars" class="button2" id="carsbutton">
+		<br/><br/>
+		<input type="button" value="Dealerships" class="button2" id="dealershipbutton">
+		<br/><br/>
+		</p>
+		<script type="text/javascript">
+			var comp = "Dealer";
+			var comp2 = document.getElementById("temp").value;
+			if (comp2.localeCompare(comp) == 0){
+		 		document.getElementById("footer").innerHTML +="<p align='center'><input type='button' value='Client List' class='button2' id='clientlistbutton'><br/><br/></p>";
+		 	}
+		</script>
+		<p align = "center">
+		<input type="button" value="Personal Info" class="button2" id="personalbutton">
+		<br/><br/>
+		</p>
+        <input type="button" class="register2" id="logoutbutton" value="Logout">
+        
+        
+        </div>
+        </form>
+        </div>
+        
+    </body>
+</html>

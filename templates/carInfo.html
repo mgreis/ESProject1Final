@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <div>
+        
+        	<h3> Edit Car Info </h3>
+        	
+        	<form style ="border:1px solid black;width: 250px; height: 500px;" action="/editCarInfo" method= "post">
+	        	Name: <br/>
+	        	<input type="hidden" name = "car_id" value={{car_id}} />
+	          	<input type="text" name = "car_brand" value={{car_brand}} />
+                <input type="text" name = "car_model" value= {{car_model}} />
+                <input type="text" name = "car_year" value="{{car_year}}" />
+                <input tyope="text"
+	            <br/>
+	            <input type = "submit" value = "Edit" />
+	        </form>
+	        
+	        <form action="/main">
+                <input type="submit" value="Back">
+            </form>
+        
+             <form action="/logout">
+                <input type="submit" value="Logout">
+            </form>
+        
+        </div>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>React Tutorial</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+</head>
+<body>
+<div id="content"></div>
+
+<script type="text/babel">
+  var data = [ { id : "1" , picture : "5", brand : "1", model : "2" , price : "4.0" , district : "7", kilometer : "6", fuel_type : "Gasoline" , year : "3", user_id : "3" , dealer_id : "None"} ];
+
+
+  var CommentBox = React.createClass({displayName: 'CommentBox',
+    loadCommentsFromServer: function(){
+      $.ajax({
+        url: this.props.url,
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+          window.alert(data);
+          this.setState ({data: data});
+        }.bind(this),
+        error: function(xhr,status,err) {
+          console.error (this.props.url, status, err.toString());
+        }.bind (this)
+      });
+    },
+    getInitialState: function (){
+      return {data:[]};
+    },
+    componentDidMount: function (){
+      this.loadCommentsFromServer();
+      setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+
+
+    },
+    render: function() {
+
+      return (
+        <div className="commentBox">
+        <h1>cars</h1>
+        <CommentList data = {this.state.data}/>
+      </div>
+      );
+    }
+  });
+
+
+  var CommentList = React.createClass({
+    render: function() {
+      var commentNodes = this.props.data.map(function (comment){
+        return (
+          <Comment author = {comment.brand} >
+        {comment.model}
+        </Comment>
+        );
+      });
+      return (
+        <div className="commentList">
+        {commentNodes}
+        </div>
+      );
+    }
+  });
+
+
+
+  var Comment = React.createClass({
+    rawMarkup: function(){
+      var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+      return {__html: rawMarkup};
+    },
+    render: function(){
+      return(
+        <div className = "comment">
+        <h2 className = "commentAuthor">
+        {this.props.brand}
+      </h2>
+      <span dangerouslySetInnerHTML = {this.rawMarkup()}/>
+      </div>
+      );
+    }
+  })
+
+
+
+  ReactDOM.render(
+  <CommentBox url = "http://localhost:5000/get_cars" pollInterval = {20000000}/>,
+
+    document.getElementById('content')
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+
+
+<!--META-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>get4Weels Login</title>
+
+<!--STYLESHEETS-->
+<link rel= "stylesheet" type= "text/css" href="/styles/style.css" />
+
+<!--SCRIPTS-->
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+<!--Slider-in icons-->
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".username").focus(function() {
+		$(".user-icon").css("left","-48px");
+	});
+	$(".username").blur(function() {
+		$(".user-icon").css("left","0px");
+	});
+	
+	$(".password").focus(function() {
+		$(".pass-icon").css("left","-48px");
+	});
+	$(".password").blur(function() {
+		$(".pass-icon").css("left","0px");
+	});
+	
+	document.getElementById("submitlogin").onclick = function() { 
+		  document.getElementById("login-form").action = "/login";
+	};
+});
+</script>
+
+<script>
+$(document).ready(function(){
+	$("#submitlogin").click(function(){
+		
+		if ($("#email").val()==''){
+			$("#message").html("Falta preencher campo obrigatório");
+			$("#email").focus(); // foco no campo
+		}else if ($("#password").val()==''){
+			$("#message").html("Falta preencher campo obrigatório");
+			$("#password").focus(); // foco no campo
+		}else{
+			$("#login-form").submit();
+		}	
+	});
+});
+</script>
+
+</head>
+<body>
+
+<div id="messagebox">
+	<div id="message">
+		{{error}}
+	</div>
+</div>
+
+<!--WRAPPER-->
+<div id="wrapper">
+
+	<!--SLIDE-IN ICONS-->
+    <div class="user-icon"></div>
+    <div class="pass-icon"></div>
+    <!--END SLIDE-IN ICONS-->
+
+<!--LOGIN FORM-->
+<form name="login-form" class="login-form" id="login-form" method="post">
+
+	<!--HEADER-->
+    <div class="header">
+    <!--TITLE--><h1>Login Form</h1><!--END TITLE-->
+    <br/>
+    </div>
+    <!--END HEADER-->
+	
+	<!--CONTENT-->
+    <div class="content">
+	<!--USERNAME--><input name="email" id="email" type="text" class="input username" value="Email" onfocus="this.value=''" /><!--END USERNAME-->
+    <!--PASSWORD--><input name="password" id="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+    </div>
+    <!--END CONTENT-->
+    
+    <!--FOOTER-->
+    <div class="footer">
+    <!--LOGIN BUTTON--><input type="button" name="submitlogin" id="submitlogin" value="Login" class="button"/><!--END LOGIN BUTTON-->
+    <!--REGISTER BUTTON--><a href="/register"> <input type="button" value="Register" class="register"/></a><!--END REGISTER BUTTON-->
+    </div>
+    <!--END FOOTER-->
+
+</form>
+<!--END LOGIN FORM-->
+
+</div>
+<!--END WRAPPER-->
+
+<!--GRADIENT--><div class="gradient"></div><!--END GRADIENT-->
+
+</body>
+</html>
