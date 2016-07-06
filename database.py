@@ -10,8 +10,8 @@ db = 'sqlalchemy'
 login = 'root'
 password = '12345678'
 
-#password = '12345678'
-password = 'Bibouzinha_1'
+password = '12345678'
+
 
 engine_str = 'mysql+pymysql://{0}:{1}@{2}/{3}'.format(login,password,server,db)
 engine = create_engine(engine_str, echo = True, encoding = 'utf8')
